@@ -1,13 +1,13 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
-
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
+use App\Profile;
+
 class NewsController extends Controller
 {
-    //
     public function add()
     {
       return view('admin.news.create');
@@ -15,9 +15,6 @@ class NewsController extends Controller
     
     public function create(Request $request)
     {
-      // admin/news/createにリダイレクトする
-      return redirect('admin/news/create');
-      
       // Varidationを行う
       $this->validate($request, News::$rules);
       
