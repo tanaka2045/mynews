@@ -40,14 +40,12 @@
              <div class="form-group row">
              <label class="col-md-2">自己紹介</label>
                <div class="col-md-10">
-                 <textarea class="form-control" name="selfintroduction" rows="10">{{ old('selfintroduction') }}</textarea>
+                 <textarea class="form-control" name="introduction" rows="10">{{ old('introduction') }}</textarea>
                </div>
            </div>
             {{ csrf_field() }}
             <input type="submit" class="btn btn-primary" value="更新">
         </form>
-        
-        
       </div>
     </div>
   </div>
