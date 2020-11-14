@@ -5,6 +5,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 use App\Profile;
+use App\ProfileHistory;
+use Carbon\Carbon;
 
 class ProfileController extends Controller
 {
@@ -45,7 +47,22 @@ class ProfileController extends Controller
     
     public function update(Request $request)
     {
-      return redirect('admin/profile/edit');
+      // Validationをかける
+      $this->validate($request, Profile::$rules);
+      // Profile Modelからデータを取得する
+      $profile = Profile::find($request->id);
+      // 送信されてきたフォームデータを格納する
+      $profile_form = $request->all();
+      unset($profile_form['_token']);
+      
+      // 該当するデータを上書きして保存する
+      $profile->fill($profile_form)->save();
+      $profilehistory = new ProfileHistory;
+      $profilehistory->profile_id = $profile->id;
+      $profilehistory->edited_at = Carbon::now();
+      $profilehistory->save();
+      
+      return redirect('admin/profile/create');
     }
     
 }
