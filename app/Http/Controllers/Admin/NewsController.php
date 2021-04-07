@@ -20,7 +20,7 @@ class NewsController extends Controller
     public function create(Request $request)
     {
       // Varidationを行う
-      $this->validate($request, News::$rules);
+      $this->validate($request, News::$rules);//インスタンスメソッドとクラスメンバの配列を両方使っている
       $news = new News;
       $form =$request->all();
       
